@@ -1,0 +1,49 @@
+:root {
+  --background: #232946;
+  --headline: #fffffe;
+  --border: #121629;
+  --button: #eebbc3;
+  --alt-text: #b8c1ec;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--headline)
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {font-family: 'Antonio', sans-serif; color: var(--headline); font-weight: 900; text-decoration: none;}
+a:hover { color: var(--button)}
+
+main {
+  max-width: 54rem;
+  width: 100%;
+  margin: 0 auto;
+  min-height: calc(100vh - 27vh); /* SPELLS SPELLS! */
+  margin-top: 3rem;
+}
+
+footer {
+  display: flex;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  clear: both;
+  position: relative;
+  margin-top: 3rem;
+}
