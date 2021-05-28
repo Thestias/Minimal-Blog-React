@@ -39,7 +39,7 @@ PREINSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MY_APPS = ["rest_framework", "api"]
+MY_APPS = ["rest_framework", "apps.api", 'apps.blog']
 
 INSTALLED_APPS = MY_APPS + PREINSTALLED_APPS
 

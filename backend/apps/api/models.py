@@ -12,11 +12,11 @@ class Blog(models.Model):
     categories = models.ManyToManyField("Category", default="Programming")
 
     def __str__(self):
-        return self.creation_time + " - " + self.author + " - " + self.title
+        return self.title + " - Author: " + str(self.author) + " - Published in:  " + str(self.creation_time)
 
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return 'Category name: ' + self.name
