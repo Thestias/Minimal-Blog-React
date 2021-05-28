@@ -39,7 +39,7 @@ PREINSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MY_APPS = ["rest_framework", "apps.api", 'apps.blog']
+MY_APPS = ["webpack_loader", "rest_framework", "apps.api", 'apps.blog']
 
 INSTALLED_APPS = MY_APPS + PREINSTALLED_APPS
 
@@ -127,3 +127,11 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Webpack Stats Loader Configurations
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'STATS_FILE': str(BASE_DIR / 'apps' / 'blog' / 'webpack-stats.json'),
+    },
+}
