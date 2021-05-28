@@ -4,7 +4,7 @@ module.exports = {
     webpack: function (config, env) {
         config.plugins.push(new BundleTracker({
             path: __dirname,
-            filename: './webpack-stats.json',
+            filename: '../backend/apps/blog/webpack-stats.json',
           }),)
         return config;
     },
