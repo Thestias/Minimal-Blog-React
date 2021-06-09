@@ -15,9 +15,10 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && mv ./build/static ../backend/apps/blog/",
+    "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "django": "node ./scripts/after_build.js"
   },
   "eslintConfig": {
     "extends": [
