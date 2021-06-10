@@ -1,7 +1,12 @@
 /*
 This script is to be run instead of the common react-app build or react-app-rewired build, it checks that 
-the path ../backend/apps/blog/static is empty and if it isnt makes a backup and then moves 
-the new CRA build files there
+the paths:
+    ./build
+    ../backend/apps/blog/static
+don't exist, and if they do a backup it's made by adding '_backup' to the path's name, and if a '_backup' folder already
+exists then it's deleted.
+Then, the ACTUAL react-app-rewired build or react-app build it's ran
+Finally the new build files are moved to the Django Blogs app.
 */
 
 // TODO: Need to also backup the webpack-loader.json
@@ -9,11 +14,6 @@ the new CRA build files there
 const fs_extra = require('fs-extra')
 const fs = require('fs');
 const { execSync } = require('child_process')
-
-const folder_source = './build/static'
-const folder_destination = '../backend/apps/blog/static'
-
-// Utilities
 
 function checkFolder(folderPath) {
     // Throw error if folder path doesn't exist
@@ -24,30 +24,30 @@ function checkFolder(folderPath) {
     return isFolderExist;
 };
 
-function move_build_static() {
-    fs_extra.move(folder_source, folder_destination)
-        .then(() => {
-            console.log('Folder "static" from build moved successfully!')
-        })
-        .catch(err => {
-            console.error(err)
-        })
-}
+const build_path = './build'
+const static_path = '../backend/apps/blog/static'
 
-function make_backup_and_delete(path) {
+function remove_rename(path) {
     if (checkFolder(path)) {
-        if (checkFolder(path + '_backup')) { fs.rm(path + '_backup', { recursive: true }) }
-        else { fs.rename(path, path + '_backup', (err) => console.log(err)) }
+        if (checkFolder(path + '_backup')) {
+            fs.rmSync(path + '_backup', { recursive: true, force: true }, (err) => console.log('remove_rename() rm :: ' + err))
+            fs.rename(path, path + '_backup', (err) => { if (err) { console.log('remove_rename() rename :: ' + err) } })
+        } else {
+            fs.rename(path, path + '_backup', (err) => { if (err) { console.log('remove_rename() rename :: ' + err) } })
+        }
     }
 }
 
-
-const static_path = '../backend/apps/blog/static'
-
-make_backup_and_delete('./build')
-make_backup_and_delete(static_path)
+remove_rename(build_path)
+remove_rename(static_path)
 
 execSync('npm run build')
 
-make_backup_and_delete(static_path)
-move_build_static()
+
+fs_extra.move(build_path + '/static', static_path)
+    .then(() => {
+        console.log('Folder "static" from build moved successfully!')
+    })
+    .catch(err => {
+        console.error('move_static_folder :: ' + err)
+    })
