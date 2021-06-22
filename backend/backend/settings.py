@@ -135,3 +135,9 @@ WEBPACK_LOADER = {
         'STATS_FILE': str(BASE_DIR / 'apps' / 'blog' / 'webpack-stats.json'),
     },
 }
+
+# So the cookies can be accessed from Javascript
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookies
+SESSION_COOKIE_HTTPONLY = True

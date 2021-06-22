@@ -1,18 +1,20 @@
 import "./Navbar.css"
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
 
     <nav className="navbar">
-      <a href="#">Piccolo</a>
+      <Link to="">Piccolo</Link>
 
       <form action="">
-          <input type="search" name="" id="" placeholder="Search.." />
+        <input type="search" name="" id="" placeholder="Search.." />
       </form>
 
-      <a href="#">Login</a>
-      <a href="#">Register</a>
+      <Link to='/login'>Login</Link>
+      <Link to='/register'>Register</Link>
     </nav>
+
   );
 }
 
