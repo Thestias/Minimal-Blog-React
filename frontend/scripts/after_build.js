@@ -41,13 +41,18 @@ function remove_rename(path) {
 remove_rename(build_path)
 remove_rename(static_path)
 
-execSync('npm run build')
-
-
-fs_extra.move(build_path + '/static', static_path)
-    .then(() => {
-        console.log('Folder "static" from build moved successfully!')
-    })
-    .catch(err => {
-        console.error('move_static_folder :: ' + err)
-    })
+try {
+    execSync('npm run build').toString()
+    fs_extra.move(build_path + '/static', static_path)
+        .then(() => {
+            console.log('Folder "static" from build moved successfully!')
+        })
+        .catch(err => {
+            console.error('move_static_folder :: ' + err)
+        })
+}
+catch (error) {
+    console.log(error.message); // Holds the message you typically want.
+    console.log(error.stderr.toString());  // Holds the stderr output. Use `.toString()`.
+    console.log(error.stdout.toString());  // Holds the stdout output. Use `.toString()`.
+}
