@@ -7,21 +7,21 @@ import LoginRegister from "./components/LoginRegister/LoginRegister";
 function App() {
   return (
     <div className="App">
-      <Navbar />
 
-    <main>
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={BlogList} />
-          <Route path="/login">
-            <LoginRegister act="Login" />
-          </Route>
-          <Route path="/register">
-            <LoginRegister act="Register" />
-          </Route>
-        </Switch>
+        <Navbar />
+        <main>
+          <Switch>
+            <Route exact path="/" component={BlogList} />
+            <Route exact path="/login">
+              <LoginRegister act="Login" />
+            </Route>
+            <Route exact path="/register">
+              <LoginRegister act="Register" />
+            </Route>
+          </Switch>
+        </main>
       </BrowserRouter>
-    </main>
 
       <footer>
         <p>© 2021 Piccolo</p>&nbsp;&nbsp;&nbsp;
