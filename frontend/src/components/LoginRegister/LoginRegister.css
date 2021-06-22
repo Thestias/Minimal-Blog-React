@@ -3,7 +3,13 @@ form {
     font-weight: 800;
 }
 
-.label, .label-wrapper {margin: 1rem 0}
+.label, .label-wrapper {
+    margin: 1rem 0;
+}
+
+.label-wrapper {
+    margin-bottom: 2rem;
+}
 
 .label {
     display: block;
@@ -20,4 +26,22 @@ form input {
 form input:focus {
     outline: none;
     border-bottom: 2px solid var(--button)
+}
+
+.button {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: var(--alt-text);
+  margin-top: 20px;
+  padding: 10px 50px;
+  border: 2px solid var(--border);
+  border-radius: 7px;
+  transition: 0.5s ease;
+}
+
+.button:hover {
+  background-color: var(--button);
+  cursor: pointer;
+  color: var(--background)
 }
