@@ -1,7 +1,8 @@
 import "./LoginRegister.css"
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { login } from "./utils/authentication.js"
+import { login, register } from "./utils/authentication.js"
+import Loading from "../LoadingComponent/LoadingComponent";
 
 function LoginRegister(props) {
     /*
@@ -11,6 +12,7 @@ function LoginRegister(props) {
     */
     const history = useHistory()
 
+    const [loading, setLoading] = useState(false) // To show a loading sing when the form is submitted and before redirecting
     const [username, setUsername] = useState([])
     const [password, setPassword] = useState([])
     const [password_conf, setPasswordConf] = useState([])
@@ -19,7 +21,13 @@ function LoginRegister(props) {
 
     function checkAction(event) {
         if (props.act === 'Register') {
-            // pass
+            let register_status = register(event, username, password, password_conf, email)
+            register_status.then((data) => {
+                if (data === 'User Registered') {
+                    setLoading(false)
+                    history.push('/login')
+                }
+            })
         }
         else {
             let login_status = login(event, username, password)
@@ -32,18 +40,24 @@ function LoginRegister(props) {
         }
     }
 
+    function isLoading() {
+        // Checks if an API call was made, if so then replaces the text in the button with a Loading component
+        if (loading === true) { return <Loading /> }
+        else { return props.act }
+    }
+
     function renderRegister() {
         if (props.act === 'Register') {
             return (
                 <div>
                     <div className="label-wrapper">
                         <label className="label" for="password_conf">Password Confirmation</label>
-                        <input id="password_conf" type="password" value={email} onChange={(event) => setPasswordConf(event.target.value)} />
+                        <input id="password_conf" type="password" value={password_conf} onChange={(event) => setPasswordConf(event.target.value)} />
                     </div>
 
                     <div className="label-wrapper">
                         <label className="label" for="email">Email</label>
-                        <input id="email" type="email" value={password_conf} onChange={(event) => setEmail(event.target.value)} />
+                        <input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
                     </div>
                 </div>
             )
@@ -64,7 +78,9 @@ function LoginRegister(props) {
 
             {renderRegister() /* Renders if props.act is Register */}
 
-            <button class="button">{props.act}</button>
+            <button class="button" onClick={() => setLoading(true)}>
+                {isLoading()}
+            </button>
         </form>
 
     )

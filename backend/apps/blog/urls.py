@@ -18,5 +18,6 @@ from .views import homepage
 
 urlpatterns = [
     path("", homepage, name="homepage"),
-    path('login/', homepage, name='login')
+    path('login/', homepage, name='login'),
+    path('register/', homepage, name="register")
 ]
