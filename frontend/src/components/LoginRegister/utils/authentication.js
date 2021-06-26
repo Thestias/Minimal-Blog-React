@@ -14,7 +14,7 @@ inside the axios.post() request beats me
 */
 const axios_instance = axios.create({
     baseURL: 'http://127.0.0.1:8000',
-    timeout: 1000,
+    timeout: 5000,
     xsrfCookieName: 'csrftoken',
     xsrfHeaderName: 'X-CSRFToken'
 
