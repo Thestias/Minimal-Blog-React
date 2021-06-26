@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { login, register } from "./utils/authentication.js"
 import Loading from "../LoadingComponent/LoadingComponent";
+import { useAuth } from "../../contexts/auth-context";
 
 function LoginRegister(props) {
     /*
@@ -19,6 +20,8 @@ function LoginRegister(props) {
     const [email, setEmail] = useState([])
 
 
+    const { isLogged, setIsLogged } = useAuth() // Importing the Auth context
+
     function checkAction(event) {
         if (props.act === 'Register') {
             let register_status = register(event, username, password, password_conf, email)
@@ -33,6 +36,8 @@ function LoginRegister(props) {
             let login_status = login(event, username, password)
             login_status.then((data) => {
                 if (data === 'Logged in') {
+                    setIsLogged(true)
+                    setLoading(false)
                     history.push('/')
                 }
             })
