@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 
 from rest_framework.response import Response
 from rest_framework import status, generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .serializers import BlogSerializer, CategorySerializer, CreateUserSerializer
 from .models import Blog, Category
@@ -14,14 +15,17 @@ import json
 class BlogList(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        # Sends the serializer the User
         serializer.save(author=self.request.user)
 
 
 class CategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class Register(generics.CreateAPIView):
