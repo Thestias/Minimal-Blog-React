@@ -6,17 +6,6 @@ function Navbar() {
 
   const { isLogged } = useAuth()
 
-  const isAuthenticated = () => {
-    if (isLogged === false) {
-      return (
-        <div>
-          <Link to='/login'>Login</Link>
-          <Link to='/register'>Register</Link>
-        </div>
-      )
-    }
-  }
-
   return (
 
     <nav className="navbar">
@@ -26,7 +15,19 @@ function Navbar() {
         <input type="search" name="" id="" placeholder="Search.." />
       </form>
 
-      {isAuthenticated()}
+      {
+        isLogged ?
+          <>
+            <Link to="/submit-blog">Add Blog</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/logout">Logout</Link>
+          </>
+          :
+          <>
+            <Link to='/login'>Login</Link>
+            <Link to='/register'>Register</Link>
+          </>
+      }
 
     </nav>
 
