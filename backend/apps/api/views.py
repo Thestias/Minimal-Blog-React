@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -72,3 +72,11 @@ def session_view(request):
         return JsonResponse({'isAuthenticated': False})
 
     return JsonResponse({'isAuthenticated': True, 'username': request.user.username})
+
+
+def logout_view(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'detail': 'You\'re not logged in.'}, status=400)
+
+    logout(request)
+    return JsonResponse({'detail': 'Successfully logged out.'})

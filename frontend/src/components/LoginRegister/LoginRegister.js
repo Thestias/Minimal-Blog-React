@@ -1,7 +1,7 @@
 import "./LoginRegister.css"
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { login, register } from "../../axios_utils/login_register";
+import { login, register } from "../../axios_utils/login_logout_register";
 import Loading from "../LoadingComponent/LoadingComponent";
 import { useAuth } from "../../contexts/auth-context";
 
