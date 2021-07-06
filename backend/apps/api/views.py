@@ -64,3 +64,11 @@ def login_view(request):
         login(request, user)
         return JsonResponse({"info": "Successfully logged in"})
     return JsonResponse({"error": "Invalid credentials"}, status=400)
+
+
+def session_view(request):
+    '''Checks if a Session cookie is valid and the user is authenticated'''
+    if not request.user.is_authenticated:
+        return JsonResponse({'isAuthenticated': False})
+
+    return JsonResponse({'isAuthenticated': True, 'username': request.user.username})
