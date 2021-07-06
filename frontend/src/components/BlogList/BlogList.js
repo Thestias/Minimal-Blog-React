@@ -11,7 +11,7 @@ function BlogList() {
 
     useEffect(() => {
         // TODO: Create a base axios so writting the full URL path its not needed
-        axios.get('http://127.0.0.1:8000/api/blog/')
+        axios.get('/api/blog/')
             .then(response => {
                 setBlogs(response.data)
                 setLoading(false)
